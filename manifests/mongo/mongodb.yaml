@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: flask
-      image: takahyon/api_mock
+      image: takahyon/pymongo
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 5000
