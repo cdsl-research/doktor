@@ -7,6 +7,7 @@ metadata:
     app: mongodb
     ver: "0.0.1"
     env: staging
+    
 spec:
   containers:
     - name: flask
@@ -14,6 +15,19 @@ spec:
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 5000
+      env:
+        - name: "MONGO_INITDB_ROOT_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_username
+        - name: "MONGO_INITDB_ROOT_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_password
+        - name: "MONGO_INITDB_DATABASE"
+          value: "admin"
     - name: mongodb
       image: mongo:4.1.13-bionic
       ports:
