@@ -10,8 +10,7 @@ metadata:
 spec:
   containers:
     - name: flask
-      image: takahyon/pymongo
-      imagePullPolicy: IfNotPresent
+      image: takahyon/pymongo:latest
       ports:
         - containerPort: 5000
     - name: mongodb
