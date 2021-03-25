@@ -9,6 +9,11 @@ metadata:
     env: staging
 spec:
   containers:
+    - name: flask
+      image: takahyon/api_mock
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 5000
     - name: mongodb
       image: mongo:4.1.13-bionic
       ports:
