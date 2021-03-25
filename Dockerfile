@@ -1,7 +1,7 @@
 FROM centos:7
 
 #IUSリポジトリを追加
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 #Python3.5をインストール
 RUN yum install -y python35u python35u-libs python35u-devel python35u-pip
 #Pythonのライブラリrequestsをpip
