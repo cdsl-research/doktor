@@ -1,21 +1,10 @@
-### code from https://levelup.gitconnected.com/deploy-your-first-flask-mongodb-app-on-kubernetes-8f5a33fa43b4
-### modified by Takamasa Iijima
-import os
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from doktor_health import health
 import socket
-print(os.environ["MONGO_INITDB_ROOT_USERNAME"])
-print(os.environ["MONGO_INITDB_ROOT_PASSWORD"])
-
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://mongodb:27017/dev"
-app.config['MONGO_DBNAME'] = 'admin'
-app.config['MONGO_USERNAME'] = os.environ["MONGO_INITDB_ROOT_USERNAME"]
-app.config['MONGO_PASSWORD'] = os.environ["MONGO_INITDB_ROOT_PASSWORD"]
+app.config["MONGO_URI"] = "mongodb://mongo:27017/dev"
 mongo = PyMongo(app)
-
 db = mongo.db
 @app.route("/")
 def index():

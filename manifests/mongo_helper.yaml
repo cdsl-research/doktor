@@ -1,46 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-deployment
+  name: tasksapp
+  labels:
+    app: tasksapp
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: flask
-  replicas: 1
+      app: tasksapp
   template:
     metadata:
       labels:
-        app: flask
+        app: tasksapp
     spec:
       containers:
-      - name: flask
-        image: takahyon/pymongo:latest
-        imagePullPolicy: Always
-        ports:
-          - containerPort: 5000
-        env:
-          - name: "MONGO_INITDB_ROOT_USERNAME"
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secret
-                key: root_username
-          - name: "MONGO_INITDB_ROOT_PASSWORD"
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secret
-                key: root_password
-          - name: "MONGO_INITDB_DATABASE"
-            value: "admin"
+        - name: tasksapp
+          image: takahyon/pymongo
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-service
+  name: tasksapp-svc
 spec:
-  type: NodePort
-  ports:
-  - port: 80
-    targetPort: 5000
-    name: http
   selector:
-    app: flask
+    app: tasksapp
+  ports:
+    - port: 8080
+      targetPort: 5000
+  type: LoadBalancer
