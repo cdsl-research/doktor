@@ -4,6 +4,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from doktor_health import health
 import socket
 
 app = Flask(__name__)
