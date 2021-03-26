@@ -10,9 +10,7 @@ print(os.environ["MONGO_INITDB_ROOT_USERNAME"])
 print(os.environ["MONGO_INITDB_ROOT_PASSWORD"])
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost/dev"
-app.config['MONGO_HOST'] = 'localhost'
-app.config['MONGO_PORT'] = '27017'
+app.config["MONGO_URI"] = "mongodb://mongodb:27017/dev"
 app.config['MONGO_DBNAME'] = 'admin'
 app.config['MONGO_USERNAME'] = os.environ["MONGO_INITDB_ROOT_USERNAME"]
 app.config['MONGO_PASSWORD'] = os.environ["MONGO_INITDB_ROOT_PASSWORD"]
