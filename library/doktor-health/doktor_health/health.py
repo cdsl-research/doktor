@@ -8,6 +8,7 @@ class HealthStatus(Enum):
     YELLOW = 200
     RED = 300
 
+
 class Health(NamedTuple):
-    status : HealthStatus
-    description : str
+    status: HealthStatus
+    description: str
