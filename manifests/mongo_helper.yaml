@@ -7,9 +7,26 @@ metadata:
     app: mongodb
     ver: "0.0.1"
     env: staging
-    
+
 spec:
   containers:
+    - name: flask
+      image: takahyon/pymongo:latest
+      ports:
+        - containerPort: 5000
+      env:
+        - name: "MONGO_INITDB_ROOT_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_username
+        - name: "MONGO_INITDB_ROOT_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: root_password
+        - name: "MONGO_INITDB_DATABASE"
+          value: "admin"
     - name: mongodb
       image: mongo:4.1.13-bionic
       ports:
@@ -43,10 +60,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: flask-service
 spec:
-  selector:
-    app: mongo
+  type: NodePort
   ports:
-    - port: 27017
-      targetPort: 27017
+  - port: 80
+    targetPort: 5000
+    name: http
+  selector:
+    app: mongodb

@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from doktor_health import health
 import socket
+print(os.environ["MONGO_INITDB_ROOT_USERNAME"])
 print(os.environ["MONGO_INITDB_ROOT_PASSWORD"])
 
 app = Flask(__name__)
