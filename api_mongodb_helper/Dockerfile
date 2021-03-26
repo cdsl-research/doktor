@@ -2,6 +2,7 @@ FROM python:3.8-slim
 
 RUN apt update
 RUN apt install -y git
+RUN apt install -y curl
 COPY . /app
 RUN pip install -r /app/requirements.txt
 
