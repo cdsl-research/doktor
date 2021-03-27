@@ -10,5 +10,5 @@ jobs:
       - name: Kubernetes yaml validation by kubeval
         uses: makocchi-git/actions-k8s-manifests-validate-kubeval@v1.0.1
         with:
-          files: "."
+          files: "service_*"
           token: ${{ secrets.GITHUB_TOKEN }}
