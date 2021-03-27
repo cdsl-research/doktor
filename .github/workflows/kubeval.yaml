@@ -1,0 +1,14 @@
+name: Pull Request Check
+
+on: [pull_request]
+
+jobs:
+  validation:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Kubernetes yaml validation by kubeval
+        uses: makocchi-git/actions-k8s-manifests-validate-kubeval@v1.0.1
+        with:
+          files: "service_*"
+          token: ${{ secrets.GITHUB_TOKEN }}
