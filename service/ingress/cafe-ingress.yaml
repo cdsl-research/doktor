@@ -6,12 +6,16 @@ spec:
   # ingressClassName: nginx # use only with k8s version >= 1.18.0
   tls:
   - hosts:
-    - cafe.example.com
+    - doktor.a910.tak-cslab.org
     secretName: cafe-secret
   rules:
-  - host: cafe.example.com
+  - host: doktor.a910.tak-cslab.org
     http:
       paths:
+      - path: /
+        backend:
+          serviceName: web-svc
+          servicePort: 80
       - path: /tea
         backend:
           serviceName: tea-svc
