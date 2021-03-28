@@ -30,6 +30,6 @@ spec:
   - port: 80
     targetPort: 5000
     name: http
-    nodePort: 30000
+    nodePort: 30080
   selector:
     app: flask
