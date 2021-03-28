@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doktor-upload
+  labels:
+    app: doktor-upload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doktor-upload
+  template:
+    metadata:
+      labels:
+        app: doktor-upload
+    spec:
+      containers:
+        - name: doktor-upload
+          image: takahyon/pymongo
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doktor-upload-svc
+spec:
+  selector:
+    app: doktor-upload
+  ports:
+    - port: 8080
+      targetPort: 5000
+  type: LoadBalancer

@@ -1,0 +1,3 @@
+Flask
+Flask-PyMongo
+-e git+https://git@github.com/cdsl-research/doktor.git#egg=doktor-health&subdirectory=library/doktor-health
