@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pdf-image
+  name: web
 spec:
   selector:
     matchLabels:
@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pdf-image
+  name: web
 spec:
   type: NodePort
   ports:
