@@ -2,6 +2,9 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: cafe-ingress
+  annotations:
+  # use the shared ingress-nginx
+  kubernetes.io/ingress.class: "nginx"
 spec:
   # ingressClassName: nginx # use only with k8s version >= 1.18.0
   tls:
