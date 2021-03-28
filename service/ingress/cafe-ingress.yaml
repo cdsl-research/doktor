@@ -14,7 +14,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: web-svc
+          serviceName: web
           servicePort: 80
       - path: /tea
         backend:
