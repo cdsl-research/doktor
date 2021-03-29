@@ -11,6 +11,7 @@ def show_page():
         msg='Hello, ',
         additional_msg="from Python")
 
+
 @app.route("/generic")
 def generic():
     return render_template(
@@ -18,12 +19,14 @@ def generic():
         msg='Hello, ',
         additional_msg="from Python")
 
+
 @app.route("/elements")
 def elements():
     return render_template(
         'elements.html',
         msg='Hello, ',
         additional_msg="from Python")
+
 
 @app.route("/healthz")
 def healthz():
