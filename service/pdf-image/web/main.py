@@ -12,7 +12,7 @@ def show_page():
         additional_msg="from Python")
 
 ## http://pdf-image/create
-@app.route("create")
+@app.route("/create")
 def create_pdf_image():
 
     ###
@@ -21,7 +21,7 @@ def create_pdf_image():
     # ここにDBにJPGを保存するコード
     ###
 
-    return jpeg_path
+    return "jpeg_path"
 
 
 @app.route("/healthz")
