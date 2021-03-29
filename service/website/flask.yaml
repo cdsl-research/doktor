@@ -15,7 +15,7 @@ spec:
       containers:
       - name: flask
         image: takahyon/dokter-web:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
             
