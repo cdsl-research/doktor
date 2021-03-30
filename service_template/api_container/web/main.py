@@ -14,10 +14,7 @@ def show_page():
 
 @app.route("/healthz")
 def healthz():
-    my_health = health.Health(
-        health.HealthStatus.GREEN,
-        "Running"
-    )
+    my_health = health.Health()
     return json.jsonify(my_health)
 
 
