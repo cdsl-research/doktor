@@ -14,7 +14,7 @@ def test():
     assert h_default.status == health.HealthStatus.GREEN
     assert h_default.description == "It works"
     print(h_default.to_dict())
-    
+
 
 if __name__ == '__main__':
     test()
