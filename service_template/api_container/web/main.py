@@ -14,8 +14,9 @@ def show_page():
 
 @app.route("/healthz")
 def healthz():
-    my_health = health.Health()
-    return json.jsonify(my_health)
+    my_health = health.Health(status=health.HealthStatus.GREEN,
+                              description="It works")
+    return json.jsonify(my_health.to_dict())
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)

@@ -19,16 +19,9 @@ from doktor_health import health
 
 @app.route("/healthz")
 def healthz():
-    my_health = health.Health()
-    return json.jsonify(my_health)
-
-@app.route("/healthz")
-def healthz():
-    my_health = health.Health(
-        health.HealthStatus.RED,
-        "Database connection error"
-    )
-    return json.jsonify(my_health)
+    my_health = health.Health(status=health.HealthStatus.GREEN,
+                              description="It works")
+    return json.jsonify(my_health.to_dict())
 ```
 
 ## When use in requirements
