@@ -1,3 +1,13 @@
+""" サービスの健康状態を定義
+
+サービスの健康状態を定義する．それぞれのマイクロサービスを対象に
+共通の監視用エンドポイントのインターフェースを提供する．
+
+.. _Google Python Style Guide:
+   http://google.github.io/styleguide/pyguide.html
+
+"""
+
 import json
 from enum import Enum
 from typing import NamedTuple
