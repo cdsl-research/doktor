@@ -11,7 +11,17 @@ class HealthStatus(int, Enum):
     RED = 300
 
 
-class Health(NamedTuple):
+class Health(object):
     """ サービスの健康状態を定義 """
-    status: HealthStatus = HealthStatus.GREEN
-    description: str = "It works"
+
+    def __init__(self,
+                 status: HealthStatus,
+                 description: str):
+        self.status = status
+        self.description = description
+
+    def to_dict(self):
+        return {
+            "status": int(self.status),
+            "description": self.description
+        }
