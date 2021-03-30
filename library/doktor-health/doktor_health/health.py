@@ -53,7 +53,7 @@ class Health(object):
 
     def to_dict(self):
         """ 辞書化するメソッド
-        
+
         辞書型でデータ属性(data attribute)を返す．
 
         Returns:
