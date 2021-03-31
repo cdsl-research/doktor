@@ -11,7 +11,9 @@ def show_page():
         msg='Hello, ',
         additional_msg="from Python")
 
-## http://pdf-image/create
+# http://pdf-image/create
+
+
 @app.route("/create")
 def create_pdf_image():
 
