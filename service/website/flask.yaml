@@ -31,4 +31,4 @@ spec:
     name: http
     nodePort: 30080
   selector:
-    app: flask
+    app: web
