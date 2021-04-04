@@ -1,6 +1,6 @@
 # api_container
 
-## Usage
+## Setup for dev
 
 Setup python environment
 
@@ -17,3 +17,19 @@ python web/main.py
 ```
 
 Access `http://localhost:5000/` by Web Browser.
+
+## Container support
+
+Build image
+
+```
+docker build -t api_container .
+```
+
+Run container
+
+```
+docker run -it --rm -p 5000:5000 api_container
+
+curl http://localhost:5000/healthz
+```
