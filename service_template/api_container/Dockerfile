@@ -23,6 +23,7 @@ FROM python:3.8-slim
 
 COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=builder /usr/local/bin/uwsgi /usr/local/bin/uwsgi
+COPY --from=builder /work/src /work/src
 
 RUN apt update \
   && apt install -y libpq5 libxml2 \
