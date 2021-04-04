@@ -1,15 +1,40 @@
-FROM python:3.8-slim
+##
+# Build container
+##
+
+FROM python:3.8-buster AS builder
 
 RUN apt update
 RUN apt install -y git
-COPY . /app
-RUN pip install -r /app/requirements.txt
+RUN apt install -y build-essential
 
+WORKDIR /work
+COPY requirements.txt /work
 
-COPY web /var/www/html/web/
+RUN pip install -r /work/requirements.txt
+# todo) static version
+RUN pip install wheel uwsgi
 
-ENV PORT 5000
+##
+# Exec container
+##
+
+FROM python:3.8-slim
+
+COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=builder /usr/local/bin/uwsgi /usr/local/bin/uwsgi
+COPY --from=builder /work/src /work/src
+
+RUN apt update \
+  && apt install -y libpq5 libxml2 \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY web/ uwsgi.ini /app
+
+RUN useradd -r -s /bin/false uwsgi-user
+RUN chown -R uwsgi-user /app
+
 EXPOSE 5000
-
-#コンテナ起動時にFlaskサーバを立ち上げ
-CMD ["python", "/var/www/html/web/main.py"]
+USER uwsgi-user
+CMD ["uwsgi", "--ini", "/app/uwsgi.ini"]
