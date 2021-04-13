@@ -101,6 +101,7 @@ def uploaded_file(filename):
 @app.route("/list")
 def elements():
     pdf_list = doktor.pdf_list()
+    pdf_list
     return render_template(
         'list.html',
         list=pdf_list,
