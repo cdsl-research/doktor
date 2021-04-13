@@ -30,7 +30,7 @@ def list_url():
     return res
 
 
-@app.route("/")
+@app.route("/list")
 def index():
     pdflist = list_url()
 

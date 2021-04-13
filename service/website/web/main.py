@@ -101,7 +101,7 @@ def elements():
     pdf_list = doktor.pdf_list()
     return render_template(
         'list.html',
-        list='pdf_list, ',
+        list=pdf_list,
         additional_msg="from Python")
 
 

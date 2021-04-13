@@ -24,7 +24,7 @@ def service_upload(filename):
     return response.json()
 
 def pdf_list():
-    url = 'http://doktor-upload:3000/pdf/list'
+    url = 'http://doktor-search:4000/list'
     response = requests.get(url)
     # print(response.status_code)
     print(response.content)

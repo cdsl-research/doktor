@@ -23,6 +23,18 @@ mongo = PyMongo(app)
 db = mongo.db
 fs = gridfs.GridFS(db)
 
+def list_url():
+    most_recent_three = fs.find().sort("uploadDate", -1).limit(50)
+    res = []
+    for grid_out in most_recent_three:
+        res.append({
+            "_id": str(grid_out._id),
+            "filename": grid_out._file['filename'],
+            "file_url": grid_out._file['file_url']
+        })
+
+    return res
+
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
