@@ -5,4 +5,39 @@ button{
 
 input{
     margin: 0 0 0 auto;
+    width: 100%;
+}
+
+@charset "UTF-8";
+input[type=file]:focus {
+  outline: 0;
+}
+
+.box {
+  margin-top: 20px;
+}
+
+.file-upload_area {
+  margin-bottom: 20px;
+  position: relative;
+}
+.file-upload_area .file-upload_input {
+  margin-left: 20px;
+}
+.file-upload_area .file-upload_input::before {
+  background: #3479e9;
+  border-radius: 2px;
+  color: #555;
+  content: "ファイルを選択";
+  font-size: 14px;
+  left: 0;
+  padding: 10px 12px;
+  position: absolute;
+  top: -8px;
+}
+.file-upload_area input[type=file]::-webkit-file-upload-button {
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-color: transparent;
+  border: 0;
+  margin: 0 20px 0 0;
 }
