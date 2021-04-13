@@ -16,20 +16,22 @@ spec:
     spec:
       containers:
         - name: doktor-upload
-          image: takahyon/pymongo
+          image: takahyon/doktor-upload
           ports:
-            - containerPort: 5000
+            - containerPort: 3000
           imagePullPolicy: Always
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: doktor-upload-svc
+  name: doktor-upload
 spec:
+  type: NodePort
   selector:
     app: doktor-upload
   ports:
-    - port: 8080
-      targetPort: 5000
-  type: LoadBalancer
+    - port: 3000
+      targetPort: 3000
+      name: http
+      nodePort: 30010

@@ -2,17 +2,44 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import socket
+import gridfs
+
+UPLOAD_FOLDER = 'upload_temp'
+ALLOWED_EXTENSIONS = {'pdf'}
+
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://mongo:27017/dev"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = 'hogehoge'
+
 mongo = PyMongo(app)
 db = mongo.db
+fs = gridfs.GridFS(db)
 
 
-@app.route("/")
+def list_url():
+    most_recent_three = fs.find().sort("uploadDate", -1).limit(50)
+    res = []
+    for grid_out in most_recent_three:
+        res.append({
+            "_id": str(grid_out._id),
+            "filename": grid_out._file['filename'],
+            "file_url": grid_out._file['file_url']
+        })
+
+    return res
+
+
+@app.route("/list")
 def index():
+    pdflist = list_url()
+    # TODO need to fix abstractive
+    for p in pdflist:
+        p['file_url'] = p['file_url'].replace("doktor-upload:3000","doktor.a910.tak-cslab.org:30010")
+
+    # pdflist = ["http://doktor-upload:3000/" + word for word in pdflist]
     hostname = socket.gethostname()
-    return jsonify(
-        message="Welcome to Tasks app! I am running inside {} pod!".format(hostname))
+    return jsonify(pdflist)
 
 
 @app.route("/tasks")
@@ -43,7 +70,7 @@ def create_task():
 def update_task(id):
     data = request.get_json(force=True)["task"]
     response = db.task.update_one({"_id": ObjectId(id)}, {
-                                  "$set": {"task": data}})
+        "$set": {"task": data}})
     if response.matched_count:
         message = "Task updated successfully!"
     else:
@@ -74,4 +101,4 @@ def delete_all_tasks():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=4000, debug=True)

@@ -1,0 +1,219 @@
+button {
+    margin: 0 0 0 auto;
+    display: block;
+}
+
+input {
+    margin: 0 0 0 auto;
+    width: 100%;
+}
+
+@charset "UTF-8";
+input[type=file]:focus {
+    outline: 0;
+}
+
+.box {
+    margin-top: 20px;
+}
+
+.file-upload_area {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.file-upload_area .file-upload_input {
+    margin-left: 20px;
+}
+
+.file-upload_area .file-upload_input::before {
+    background: #3479e9;
+    border-radius: 2px;
+    color: #555;
+    content: "ファイルを選択";
+    font-size: 14px;
+    left: 0;
+    padding: 10px 12px;
+    position: absolute;
+    top: -8px;
+}
+
+.file-upload_area input[type=file]::-webkit-file-upload-button {
+    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-color: transparent;
+    border: 0;
+    margin: 0 20px 0 0;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+/*Just the background stuff*/
+.card > span.s1 {
+    position: absolute;
+    top: 0;
+    font-size: 15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #3C4447;
+}
+
+.card > span.s2 {
+    font-weight: 800;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 15rem;
+    text-transform: uppercase;
+    color: #3C4447;
+}
+
+/*My hum... body.. yeah..*/
+.card > body {
+    color: #000000;
+    background-color: #353B3F;
+    font-family: "Roboto", sans-serif;
+}
+
+/* The card */
+.card {
+    color: #000000;
+    position: relative;
+    height: 450px;
+    width: 1000px;
+    margin: 200px auto;
+    margin-top: 0;
+    background-color: #FFF;
+    -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Image on the left side */
+.card > .thumbnail {
+    float: left;
+    position: relative;
+    left: 30px;
+    top: -30px;
+    height: 600px;
+    width: 530px;
+    -webkit-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+}
+
+/*object-fit: cover;*/
+/*object-position: center;*/
+.card > img.left {
+    position: absolute;
+    left: 60%;
+    top: 100%;
+    height: auto;
+    width: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* Right side of the card */
+.card > .right {
+    color: #000000;
+    margin-left: 590px;
+    margin-right: 20px;
+}
+
+.card > h1 {
+    padding-top: 15px;
+    font-size: 1.3rem;
+    color: #4B4B4B;
+}
+
+.card > .author {
+    background-color: #9ECAFF;
+    height: 30px;
+    width: 110px;
+    border-radius: 20px;
+}
+
+.author > img {
+    padding-top: 5px;
+    margin-left: 10px;
+    float: left;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+.card > h2 {
+    padding-top: 8px;
+    margin-right: 6px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.card > .separator {
+    margin-top: 10px;
+    border: 1px solid #C3C3C3;
+}
+
+.card > p {
+    text-align: justify;
+    padding-top: 10px;
+    font-size: 0.95rem;
+    line-height: 150%;
+    color: #4B4B4B;
+}
+
+/* DATE of release*/
+.card > h5 {
+    position: absolute;
+    left: 30px;
+    bottom: -120px;
+    font-size: 6rem;
+    color: #C3C3C3;
+}
+
+.card > h6 {
+    position: absolute;
+    left: 30px;
+    bottom: -55px;
+    font-size: 2rem;
+    color: #C3C3C3;
+}
+
+/* Those futur buttons */
+.card > ul {
+    margin-left: 250px;
+}
+
+.card > li {
+    display: inline;
+    list-style: none;
+    padding-right: 40px;
+    color: #7B7B7B;
+}
+
+/* Floating action button */
+.card > .fab {
+    position: absolute;
+    right: 50px;
+    bottom: -40px;
+    box-sizing: border-box;
+    padding-top: 18px;
+    background-color: #1875D0;
+    width: 80px;
+    height: 80px;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    -webkit-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+}
+
+h1{
+  word-wrap: break-word;
+}
+
+h1{
+  word-wrap: break-word;
+}

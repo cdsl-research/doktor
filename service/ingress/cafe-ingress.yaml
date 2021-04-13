@@ -9,10 +9,10 @@ spec:
   # ingressClassName: nginx # use only with k8s version >= 1.18.0
   tls:
   - hosts:
-    - doktor.a910.tak-cslab.org
+    - localhost
     secretName: cafe-secret
   rules:
-  - host: doktor.a910.tak-cslab.org
+  - host: localhost
     http:
       paths:
       - path: /

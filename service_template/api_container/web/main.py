@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, json
 from doktor_health import health
 
 app = Flask(__name__)
@@ -14,10 +14,10 @@ def show_page():
 
 @app.route("/healthz")
 def healthz():
-    return render_template(
-        'index.html',
-        msg='Hello, ',
-        additional_msg="from Python")
+    my_health = health.Health(status=health.HealthStatus.GREEN,
+                              description="It works")
+    return json.jsonify(my_health.to_dict())
 
 
-app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)

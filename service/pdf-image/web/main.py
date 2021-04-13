@@ -7,15 +7,18 @@ app = Flask(__name__)
 @app.route("/")
 def show_page():
     return render_template(
-        'index.html',
+        'index2.html',
         msg='Hello, ',
         additional_msg="from Python")
 
-## http://pdf-image/create
-@app.route("create")
+# http://pdf-image/create
+
+
+@app.route("/create")
 def create_pdf_image():
 
     ###
+    f = open("filename.pdf", r)
     # ここでファイルをオープン f = open(pdfのリンク)
     # ここにpdfからJPGにするコード
     # ここにDBにJPGを保存するコード
@@ -27,7 +30,7 @@ def create_pdf_image():
 @app.route("/healthz")
 def healthz():
     return render_template(
-        'index.html',
+        'index2.html',
         msg='Hello, ',
         additional_msg="from Python")
 

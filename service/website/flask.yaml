@@ -5,17 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: flask
+      app: web
   replicas: 1
   template:
     metadata:
       labels:
-        app: flask
+        app: web
     spec:
       containers:
-      - name: flask
-        image: takahyon/api_mock:latest
-        imagePullPolicy: IfNotPresent
+      - name: web
+        image: takahyon/doktor-web
         ports:
           - containerPort: 5000
             
@@ -27,9 +26,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 80
+  - port: 5000
     targetPort: 5000
     name: http
     nodePort: 30080
   selector:
-    app: flask
+    app: web

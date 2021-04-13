@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 def show_page():
     return render_template(
-        'index.html',
+        'index2.html',
         msg='Hello, ',
         additional_msg="from Python")
 
@@ -15,7 +15,7 @@ def show_page():
 @app.route("/healthz")
 def healthz():
     return render_template(
-        'index.html',
+        'index2.html',
         msg='Hello, ',
         additional_msg="from Python")
 

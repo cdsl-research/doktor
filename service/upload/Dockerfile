@@ -8,8 +8,8 @@ RUN pip install -r /app/requirements.txt
 
 COPY web /var/www/html/web/
 
-ENV PORT 5000
-EXPOSE 5000
+ENV PORT 3000
+EXPOSE 3000
 
 #コンテナ起動時にFlaskサーバを立ち上げ
 CMD ["python", "/var/www/html/web/main.py"]
