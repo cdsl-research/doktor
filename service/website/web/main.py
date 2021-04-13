@@ -4,6 +4,7 @@ from doktor_health import health
 from werkzeug.utils import secure_filename
 import asyncio
 import requests
+import doktor_service as doktor
 
 UPLOAD_FOLDER = 'upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
@@ -38,7 +39,7 @@ def service_upload(filename):
     # ★ポイント2
     fileName = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     fileDataBinary = open(fileName, 'rb').read()
-    files = {'pdf': (fileName, fileDataBinary, 'application/pdf')}
+    files = {'pdf': (filename, fileDataBinary, 'application/pdf')}
 
     # ★ポイント3
     url = 'http://doktor-upload:3000/web/upload'
@@ -95,11 +96,12 @@ def uploaded_file(filename):
                                filename)
 
 
-@app.route("/elements")
+@app.route("/list")
 def elements():
+    pdf_list = doktor.pdf_list()
     return render_template(
-        'elements.html',
-        msg='Hello, ',
+        'list.html',
+        list='pdf_list, ',
         additional_msg="from Python")
 
 

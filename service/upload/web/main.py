@@ -59,19 +59,19 @@ def upload():
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         fileDataBinary = open(save_path, 'rb').read()
         id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
-        args = {'filename': filename, '_id': id}
+        args = {'filename': file.filename, '_id': id, 'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
         res = fs.put(file, file=fileDataBinary, **args)
         result = {
             '_id': str(id),
             'filename': filename,
-            'file_url': filename,
+            'file_url': "http://doktor-upload:3000/pdf/" + str(id)
         }
 
         print(id)
         return jsonify(data=result)
 
 
-@app.route("/tasks")
+@app.route("/pdf/list")
 def get_all_tasks():
     tasks = fs.find()
     data = []
@@ -87,7 +87,7 @@ def get_all_tasks():
     )
 
 
-@app.route("/task/<id>", methods=["GET"])
+@app.route("/pdf/<id>", methods=["GET"])
 def get_task(id):
     get_obj = fs.get(bson.objectid.ObjectId(id))
     print(get_obj.filename)  # b'Hello, World!'
