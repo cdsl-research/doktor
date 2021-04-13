@@ -6,7 +6,9 @@ import asyncio
 import requests
 import doktor_service as doktor
 
-UPLOAD_FOLDER = 'upload_temp'
+
+
+UPLOAD_FOLDER = os.path.dirname(__file__)+'/upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__, static_folder="assets")
