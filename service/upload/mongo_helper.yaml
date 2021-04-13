@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: doktor-upload-svc
+  name: doktor-upload
 spec:
   selector:
     app: doktor-upload
