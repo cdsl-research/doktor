@@ -6,7 +6,10 @@ from werkzeug.utils import secure_filename
 import asyncio
 import requests
 import os
+import io
+import bson
 import uuid
+import gridfs
 
 UPLOAD_FOLDER = 'upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
@@ -18,6 +21,7 @@ app.secret_key = 'hogehoge'
 
 mongo = PyMongo(app)
 db = mongo.db
+fs = gridfs.GridFS(db)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -52,24 +56,50 @@ def upload():
         # submit an empty part without filename
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        id = uuid.uuid4()
-        result = {'id': id, 'file_url': filename}
+        save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        fileDataBinary = open(save_path, 'rb').read()
+        args = {'file_name': filename}
+        res = fs.put(file, file=fileDataBinary, **args)
+        result = {
+            '_id': str(res),
+            'file_name': filename,
+            'file_url': filename,
+        }
+
+        print(res)
         return jsonify(data=result)
 
 
 @app.route("/tasks")
 def get_all_tasks():
-    tasks = db.task.find()
+    tasks = fs.find()
     data = []
     for task in tasks:
         item = {
             "id": str(task["_id"]),
-            "task": task["task"]
+            "file_name": task["file_name"],
+            # "pdf": task["pdf"]
         }
         data.append(item)
     return jsonify(
         data=data
     )
+
+
+@app.route("/task/<id>", methods=["GET"])
+def get_task(id):
+    get_obj = fs.get(bson.objectid.ObjectId(id))
+    print(get_obj.filename)  # b'Hello, World!'
+    # response = make_response(get_obj.file)
+    # response.headers.set('Content-Type', 'application/pdf')
+    # response.headers.set(
+    #     'Content-Disposition', 'attachment', filename='%s.pdf' % id)
+    # return response
+
+    return send_file(
+        io.BytesIO(get_obj.file),
+        mimetype='application/pdf',
+        attachment_filename='%s.pdf' % id)
 
 
 @app.route("/task", methods=["POST"])

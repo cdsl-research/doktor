@@ -41,7 +41,7 @@ def service_upload(filename):
     files = {'pdf': (fileName, fileDataBinary, 'application/pdf')}
 
     # ★ポイント3
-    url = 'http://localhost:3000/web/upload'
+    url = 'http://doktor-upload:3000/web/upload'
     response = requests.post(url, files=files)
 
     # print(response.status_code)
