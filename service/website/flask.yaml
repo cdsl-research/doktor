@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: takahyon/dokter-web
+        image: takahyon/doktor-web
         ports:
           - containerPort: 5000
             
