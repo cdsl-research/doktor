@@ -11,7 +11,7 @@ import bson
 import uuid
 import gridfs
 
-UPLOAD_FOLDER = os.path.dirname(__file__)+'upload_temp'
+UPLOAD_FOLDER = os.path.dirname(__file__)+'/upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
