@@ -58,15 +58,16 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         fileDataBinary = open(save_path, 'rb').read()
-        args = {'file_name': filename}
+        id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
+        args = {'filename': filename, '_id': id}
         res = fs.put(file, file=fileDataBinary, **args)
         result = {
-            '_id': str(res),
-            'file_name': filename,
+            '_id': str(id),
+            'filename': filename,
             'file_url': filename,
         }
 
-        print(res)
+        print(id)
         return jsonify(data=result)
 
 
