@@ -69,18 +69,20 @@ def upload():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        fileDataBinary = open(save_path, 'rb').read()
-        id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
-        args = {'filename': file.filename, '_id': id, 'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
-        res = fs.put(file, file=fileDataBinary, **args)
-        result = {
-            '_id': str(id),
-            'filename': filename,
-            'file_url': "http://doktor-upload:3000/pdf/" + str(id)
-        }
 
-        print(id)
-        return jsonify(data=result)
+        with open(save_path, 'rb').read() as fileDataBinary:
+            id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
+            args = {'filename': file.filename, '_id': id, 'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
+            res = fs.put(file, file=fileDataBinary, **args)
+            result = {
+                '_id': str(id),
+                'filename': filename,
+                'file_url': "http://doktor-upload:3000/pdf/" + str(id)
+            }
+
+            print(id)
+            os.remove(save_path)
+            return jsonify(data=result)
 
 
 @app.route("/pdf/list")
