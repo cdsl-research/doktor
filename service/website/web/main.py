@@ -40,14 +40,13 @@ def upload():
 def service_upload(filename):
     # ★ポイント2
     fileName = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    with open(fileName, 'rb').read() as fileDataBinary:
-        files = {'pdf': (filename, fileDataBinary, 'application/pdf')}
+    with open(fileName, 'rb') as fileDataBinary:
+        files = {'pdf': (filename, fileDataBinary.read(), 'application/pdf')}
 
         # ★ポイント3
         url = 'http://doktor-upload:3000/web/upload'
         response = requests.post(url, files=files)
-
-
+        fileDataBinary.close
         # print(response.status_code)
 
         print(response.content)
@@ -76,7 +75,7 @@ def uploading():
             res = service_upload(filename)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return res
-            return redirect(url_for('/list'))
+            return redirect(url_for('/list', filename=filename))
 
     return '''
             <!doctype html>

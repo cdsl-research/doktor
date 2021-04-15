@@ -70,10 +70,10 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-        with open(save_path, 'rb').read() as fileDataBinary:
+        with open(save_path, 'rb') as fileDataBinary:
             id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
             args = {'filename': file.filename, '_id': id, 'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
-            res = fs.put(file, file=fileDataBinary, **args)
+            res = fs.put(file, file=fileDataBinary.read(), **args)
             result = {
                 '_id': str(id),
                 'filename': filename,

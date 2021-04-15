@@ -1,8 +1,8 @@
-docker build -t takahyon/dokter-web service/website
-docker push takahyon/dokter-web
+docker build -t takahyon/doktor-web service/website
+docker push takahyon/doktor-web
 
-docker build -t takahyon/dokter-upload service/upload
-docker push takahyon/dokter-upload
+docker build -t takahyon/doktor-upload service/upload
+docker push takahyon/doktor-upload
 
-docker build -t takahyon/dokter-search service/search
-docker push takahyon/dokter-search
+docker build -t takahyon/doktor-search service/search
+docker push takahyon/doktor-search
