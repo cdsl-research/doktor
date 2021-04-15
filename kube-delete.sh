@@ -1,3 +1,3 @@
-kubectl delete -f service/docker-web
-kubectl delete -f service/docker-upload
-kubectl delete -f service/docker-search
+kubectl delete -f service/web
+kubectl delete -f service/upload
+kubectl delete -f service/search

@@ -1,4 +1,4 @@
-docker build -t takahyon/dokter-web service/web
+docker build -t takahyon/dokter-web service/website
 docker push takahyon/dokter-web
 
 docker build -t takahyon/dokter-upload service/upload
