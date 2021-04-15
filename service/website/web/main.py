@@ -6,9 +6,7 @@ import asyncio
 import requests
 import doktor_service as doktor
 
-
-
-UPLOAD_FOLDER = os.path.dirname(__file__)+'/upload_temp'
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__, static_folder="assets")
@@ -75,7 +73,7 @@ def uploading():
             res = service_upload(filename)
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return res
-            return redirect(url_for('/list', filename=filename))
+            return redirect(url_for('show_list'))
 
     return '''
             <!doctype html>
@@ -100,7 +98,7 @@ def uploaded_file(filename):
 
 
 @app.route("/list")
-def elements():
+def show_list():
     pdf_list = doktor.pdf_list()
     pdf_list
     return render_template(
