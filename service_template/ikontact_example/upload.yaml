@@ -25,9 +25,9 @@ spec:
           volumeMounts:
             - mountPath: /var/log/main
               name: logcache-volume
-        volumes:
-          - name: logcache-volume
-            emptyDir: { }
+      volumes:
+        - name: logcache-volume
+          emptyDir: { }
 
 ---
 apiVersion: v1
