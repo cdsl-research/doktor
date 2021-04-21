@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doktor-upload-ikontainer
+  labels:
+    app: doktor-upload-ikontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doktor-upload-ikontainer
+  template:
+    metadata:
+      labels:
+        app: doktor-upload-ikontainer
+    spec:
+      containers:
+        - name: doktor-upload-ikontainer
+          image: takahyon/doktor-upload
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+        - name: ikontainer
+          image: takahyon/ikontainer
+          volumeMounts:
+            - mountPath: /var/log/main
+              name: logcache-volume
+        volumes:
+          - name: logcache-volume
+            emptyDir: { }
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doktor-upload-ikontainer
+spec:
+  type: NodePort
+  selector:
+    app: doktor-upload-ikontainer
+  ports:
+    - port: 3000
+      targetPort: 3000
+      name: http
+      nodePort: 30010

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-ikontainer
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-ikontainer
+    spec:
+      containers:
+      - name: web-ikontainer
+        image: takahyon/doktor-web
+        ports:
+          - containerPort: 5000
+        volumeMounts:
+          - mountPath: /var/log/main
+            name: logcache-volume
+      - name: ikontainer
+        image: takahyon/ikontainer
+        volumeMounts:
+        - mountPath: /var/log/main
+          name: logcache-volume
+      volumes:
+      - name: logcache-volume
+        emptyDir: {}
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ikontainer
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: http
+    nodePort: 30080
+  selector:
+    app: web-ikontainer

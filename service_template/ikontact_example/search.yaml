@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doktor-search-ikontainer
+  labels:
+    app: search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doktor-search-ikontainer
+  template:
+    metadata:
+      labels:
+        app: doktor-search-ikontainer
+    spec:
+      containers:
+        - name: doktor-search-ikontainer
+          image: takahyon/doktor-search
+          ports:
+            - containerPort: 4000
+          imagePullPolicy: Always
+        - name: ikontainer
+          image: takahyon/ikontainer
+          volumeMounts:
+            - mountPath: /var/log/main
+              name: logcache-volume
+      volumes:
+        - name: logcache-volume
+          emptyDir: { }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doktor-search-ikontainer
+spec:
+  selector:
+    app: doktor-search-ikontainer
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: LoadBalancer
