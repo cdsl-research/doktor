@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: doktor-search-ikontainer
+  name: doktor-search
   labels:
     app: search
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: doktor-search-ikontainer
+      app: doktor-search
   template:
     metadata:
       labels:
-        app: doktor-search-ikontainer
+        app: doktor-search
     spec:
       containers:
-        - name: doktor-search-ikontainer
+        - name: doktor-search
           image: takahyon/doktor-search
           ports:
             - containerPort: 4000
@@ -32,10 +32,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: doktor-search-ikontainer
+  name: doktor-search
 spec:
   selector:
-    app: doktor-search-ikontainer
+    app: doktor-search
   ports:
     - port: 4000
       targetPort: 4000

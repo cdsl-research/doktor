@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-ikontainer
+  name: web
 spec:
   selector:
     matchLabels:
@@ -10,10 +10,10 @@ spec:
   template:
     metadata:
       labels:
-        app: web-ikontainer
+        app: web
     spec:
       containers:
-      - name: web-ikontainer
+      - name: web
         image: takahyon/doktor-web
         ports:
           - containerPort: 5000
@@ -33,13 +33,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-ikontainer
+  name: web
 spec:
   type: NodePort
   ports:
   - port: 5000
     targetPort: 5000
     name: http
-    nodePort: 30080
+    nodePort: 30081
   selector:
-    app: web-ikontainer
+    app: web
