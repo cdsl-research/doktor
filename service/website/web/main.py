@@ -6,9 +6,7 @@ import asyncio
 import requests
 import doktor_service as doktor
 
-
-
-UPLOAD_FOLDER = os.path.dirname(__file__)+'/upload_temp'
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__, static_folder="assets")
@@ -40,17 +38,17 @@ def upload():
 def service_upload(filename):
     # ★ポイント2
     fileName = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    fileDataBinary = open(fileName, 'rb').read()
-    files = {'pdf': (filename, fileDataBinary, 'application/pdf')}
+    with open(fileName, 'rb') as fileDataBinary:
+        files = {'pdf': (filename, fileDataBinary.read(), 'application/pdf')}
 
-    # ★ポイント3
-    url = 'http://doktor-upload:3000/web/upload'
-    response = requests.post(url, files=files)
+        # ★ポイント3
+        url = 'http://doktor-upload:3000/web/upload'
+        response = requests.post(url, files=files)
+        fileDataBinary.close
+        # print(response.status_code)
 
-    # print(response.status_code)
-
-    print(response.content)
-    return response.json()
+        print(response.content)
+        return response.json()
 
 
 @app.route("/uploading", methods=["POST"])
@@ -73,8 +71,9 @@ def uploading():
             # loop.run_until_complete(asyncio.ensure_future(upload()))
             # loop.close()
             res = service_upload(filename)
-            return res
-            # return redirect(url_for('uploaded_file', filename=filename))
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # return res
+            return redirect(url_for('show_list'))
 
     return '''
             <!doctype html>
@@ -99,7 +98,7 @@ def uploaded_file(filename):
 
 
 @app.route("/list")
-def elements():
+def show_list():
     pdf_list = doktor.pdf_list()
     pdf_list
     return render_template(
