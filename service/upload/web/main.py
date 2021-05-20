@@ -11,7 +11,7 @@ import bson
 import uuid
 import gridfs
 
-UPLOAD_FOLDER = os.path.dirname(__file__)+'/upload_temp'
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/upload_temp'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ app.secret_key = 'hogehoge'
 mongo = PyMongo(app)
 db = mongo.db
 fs = gridfs.GridFS(db)
+
 
 def list_url():
     most_recent_three = fs.find().sort("uploadDate", -1).limit(50)
@@ -71,8 +72,10 @@ def upload():
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
         with open(save_path, 'rb') as fileDataBinary:
-            id = bson.objectid.ObjectId(str(uuid.uuid4()).replace("-", "")[:24])
-            args = {'filename': file.filename, '_id': id, 'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
+            id = bson.objectid.ObjectId(
+                str(uuid.uuid4()).replace("-", "")[:24])
+            args = {'filename': file.filename, '_id': id,
+                    'file_url': "http://doktor-upload:3000/pdf/" + str(id)}
             res = fs.put(file, file=fileDataBinary.read(), **args)
             result = {
                 '_id': str(id),
