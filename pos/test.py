@@ -1,8 +1,7 @@
 names = ["couchbase", "postgres", "ubuntu", "alpine", "mongo", "traefil", "redis", "busybox", "mariadb", "node"]
 
 for n in names:
-    tem = """
-    apiVersion: apps/v1
+    tem = """apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: %name
