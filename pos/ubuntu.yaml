@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: ubuntu
+spec:
+  selector:
+    matchLabels:
+      app: ubuntu
+  replicas: 1
+  template:
     metadata:
-      name: ubuntu
+      labels:
+        app: ubuntu
     spec:
-      selector:
-        matchLabels:
-          app: ubuntu
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: ubuntu
-        spec:
-          containers:
-          - name: flask
-            image: ubuntu:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: ubuntu
+        image: ubuntu:latest
+        imagePullPolicy: IfNotPresent

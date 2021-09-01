@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: alpine
+spec:
+  selector:
+    matchLabels:
+      app: alpine
+  replicas: 1
+  template:
     metadata:
-      name: alpine
+      labels:
+        app: alpine
     spec:
-      selector:
-        matchLabels:
-          app: alpine
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: alpine
-        spec:
-          containers:
-          - name: flask
-            image: alpine:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: alpine
+        image: alpine:latest
+        imagePullPolicy: IfNotPresent

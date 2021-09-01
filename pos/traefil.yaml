@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: traefil
+spec:
+  selector:
+    matchLabels:
+      app: traefil
+  replicas: 1
+  template:
     metadata:
-      name: traefil
+      labels:
+        app: traefil
     spec:
-      selector:
-        matchLabels:
-          app: traefil
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: traefil
-        spec:
-          containers:
-          - name: flask
-            image: traefil:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: traefil
+        image: traefil:latest
+        imagePullPolicy: IfNotPresent

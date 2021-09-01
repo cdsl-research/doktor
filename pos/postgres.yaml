@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  replicas: 1
+  template:
     metadata:
-      name: postgres
+      labels:
+        app: postgres
     spec:
-      selector:
-        matchLabels:
-          app: postgres
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: postgres
-        spec:
-          containers:
-          - name: flask
-            image: postgres:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: postgres
+        image: postgres:latest
+        imagePullPolicy: IfNotPresent

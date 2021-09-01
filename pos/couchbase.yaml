@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: couchbase
+spec:
+  selector:
+    matchLabels:
+      app: couchbase
+  replicas: 1
+  template:
     metadata:
-      name: couchbase
+      labels:
+        app: couchbase
     spec:
-      selector:
-        matchLabels:
-          app: couchbase
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: couchbase
-        spec:
-          containers:
-          - name: flask
-            image: couchbase:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: couchbase
+        image: couchbase:latest
+        imagePullPolicy: IfNotPresent

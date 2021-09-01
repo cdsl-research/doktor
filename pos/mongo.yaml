@@ -1,19 +1,18 @@
 apiVersion: apps/v1
-    kind: Deployment
+kind: Deployment
+metadata:
+  name: mongo
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  replicas: 1
+  template:
     metadata:
-      name: mongo
+      labels:
+        app: mongo
     spec:
-      selector:
-        matchLabels:
-          app: mongo
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: mongo
-        spec:
-          containers:
-          - name: flask
-            image: mongo:latest
-            imagePullPolicy: IfNotPresent
-    
+      containers:
+      - name: mongo
+        image: mongo:latest
+        imagePullPolicy: IfNotPresent
