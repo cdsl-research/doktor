@@ -35,7 +35,8 @@ def index():
     pdflist = list_url()
     # TODO need to fix abstractive
     for p in pdflist:
-        p['file_url'] = p['file_url'].replace("doktor-upload:3000","doktor.a910.tak-cslab.org:30010")
+        p['file_url'] = p['file_url'].replace(
+            "doktor-upload:3000", "doktor.a910.tak-cslab.org:30010")
 
     # pdflist = ["http://doktor-upload:3000/" + word for word in pdflist]
     hostname = socket.gethostname()
