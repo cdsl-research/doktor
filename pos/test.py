@@ -1,4 +1,14 @@
-names = ["couchbase", "postgres", "ubuntu", "alpine", "mongo", "traefil", "redis", "busybox", "mariadb", "node"]
+names = [
+    "couchbase",
+    "postgres",
+    "ubuntu",
+    "alpine",
+    "mongo",
+    "traefil",
+    "redis",
+    "busybox",
+    "mariadb",
+    "node"]
 
 for n in names:
     tem = """apiVersion: apps/v1
@@ -20,5 +30,5 @@ for n in names:
             image: %name:latest
             imagePullPolicy: IfNotPresent
     """
-    with open(f"{n}.yaml","w") as f:
-        f.write(tem.replace("%name",n))
+    with open(f"{n}.yaml", "w") as f:
+        f.write(tem.replace("%name", n))

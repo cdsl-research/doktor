@@ -21,7 +21,9 @@ def main():
     # Upload '/home/user/Photos/asiaphotos.zip' as object name
     # 'asiaphotos-2015.zip' to bucket 'asiatrip'.
     client.fput_object(
-        "asiatrip", "Iijima_IPSJ_2021_02_Journal.pdf", "upload_temp/Iijima_IPSJ_2021_02_Journal.pdf",
+        "asiatrip",
+        "Iijima_IPSJ_2021_02_Journal.pdf",
+        "upload_temp/Iijima_IPSJ_2021_02_Journal.pdf",
     )
     print(
         "'/home/user/Photos/asiaphotos.zip' is successfully uploaded as "
