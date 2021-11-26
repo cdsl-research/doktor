@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 def show_page():
     return render_template(
-        'index2.html',
+        'index.html',
         msg='Hello, ',
         additional_msg="from Python")
 
@@ -30,7 +30,7 @@ def create_pdf_image():
 @app.route("/healthz")
 def healthz():
     return render_template(
-        'index2.html',
+        'index.html',
         msg='Hello, ',
         additional_msg="from Python")
 

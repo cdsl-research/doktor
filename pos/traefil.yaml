@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefil
+spec:
+  selector:
+    matchLabels:
+      app: traefil
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: traefil
+    spec:
+      containers:
+      - name: traefil
+        image: traefil:latest
+        imagePullPolicy: IfNotPresent
